@@ -1,0 +1,30 @@
+<!-- student_credentials.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Issues</title>
+</head>
+<body>
+    <h1>User Issues</h1>
+    <!-- Issues list display -->
+    {% if issues %}
+        <h2>My Issues:</h2>
+        <table>
+            <tr>
+              <th>Book title</th>
+              <th>Start date</th>
+              <th>Status</th>
+            </tr>
+            {% for issue in issues %}
+                <tr>
+                    <td>{{ issue[0] }}</td>
+                    <td>{{ issue[1] }}</td>
+                    <td>{{ 'returned' if issue[2] else 'pending return' }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No issues found.</p>
+    {% endif %}
+</body>
+</html>

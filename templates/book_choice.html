@@ -1,0 +1,36 @@
+<!-- book_choice.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Choice</title>
+</head>
+<body>
+    <h1>Book Choice</h1>
+    {% if books %}
+        <ul>
+            {% for book in books %}
+                <li>
+                    <h3>{{ book.Book_title }}</h3>
+                    <p>Category: {{ book.Book_category }}</p>
+                    <p>Author: {{ book.Book_author_name }}</p>
+                    <form method="POST" action="/reservation">
+                        <input type="hidden" name="book_id" value="{{ book.Book_ID }}">
+                        <input type="submit" value="Reservation">
+                    </form>
+                    <form method="POST" action="/issue">
+                        <input type="hidden" name="book_id" value="{{ book.Book_ID }}">
+                        <input type="submit" value="Issue">
+                    </form>
+                    <form method="POST" action="/review">
+                        <input type="hidden" name="book_id" value="{{ book.Book_ID }}">
+                        <input type="submit" value="Review">
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No books found.</p>
+    {% endif %}
+    <a href="{{ url_for('book_search') }}">Back to Search</a>
+</body>
+</html>

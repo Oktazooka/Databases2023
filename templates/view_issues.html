@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Issues</title>
+</head>
+<body>
+    <h2>Issues:</h2>
+    <ul>
+        {% for issue in issues %}
+          <li>
+              <strong>Issue ID:</strong> {{ issue[0] }} <br>
+              <strong>Book ID:</strong> {{ issue[4]}} <br>
+              <strong>User ID:</strong> {{ issue[3] }} <br>
+              <strong>Start date:</strong> {{ issue[1] }} <br>
+              <strong>Pending:</strong> {{ issue[6] }} <br>
+              <strong>Status:</strong> {{'returned' if issue[7] else 'pending return' }}  <br>
+              {% if issue[6] == 1 %}
+                  <form action="/view_issues/update/{{ issue[0] }}" method="POST">
+                      <input type="hidden" name="issue_id" value="{{ issue[0] }}">
+                      <button class="power-button" type="submit">Resolve</button>
+                  </form>
+              {% endif %}
+            </li>
+            <hr>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Delayed Issues</title>
+</head>
+<body>
+    <h2>Delayed Issues:</h2>
+    <ul>
+        {% for issue in issues %}
+          <li>
+              <strong>Issue ID:</strong> {{ issue[0] }} <br>
+              <strong>Book ID:</strong> {{ issue[1]}} <br>
+              <strong>User ID:</strong> {{ issue[2] }} <br>
+              <strong>Start date:</strong> {{ issue[3] }} <br>
+              <strong>Days delayed:</strong> {{ issue[5] }} <br>
+              <strong>Status:</strong> {{'returned' if issue[4] else 'pending return' }}  <br>
+            </li>
+            <hr>
+        {% endfor %}
+    </ul>
+</body>
+</html>

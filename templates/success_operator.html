@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Account</title>
+</head>
+<body>
+  <form method="POST" action="/success_operator">
+      {{ form.query1 }}
+      {% if form.query1.label %}
+      <label for="query1">Category | Title | Author | Copies </label>
+      {% endif %}
+      {{ form.query1_title }}
+      {{ form.query1_category }}
+      {{ form.query1_author }}
+      {{ form.query1_copies }}
+  </form>
+  <form method="POST" action="/success_operator">
+      {{ form.query2 }}
+      {% if form.query2.label %}
+      <label for="query2">Firstname | Lastname | Days delayed </label>
+      {% endif %}
+      {{ form.query2_firstname }}
+      {{ form.query2_lastname }}
+      {{ form.query2_days_delayed }}
+  </form>
+  <form method="POST" action="/success_operator">
+      {{ form.query3 }}
+      {% if form.query3.label %}
+      <label for="query3"> User_ID | Category </label>
+      {% endif %}
+      {{ form.query3_category }}
+      {{ form.query3_userid }}
+  </form>
+  <form method="POST" action="/success_operator">
+    {{ form.view_issues }}
+  </form>
+  <form method="POST" action="/success_operator">
+    {{ form.view_delayed_issues }}
+  </form>
+  <form method="POST" action="/success_operator">
+    {{ form.change_theme }}
+  </form>
+  <h2>Results:</h2>
+  <ul>
+    {% for result in results %}
+      <li>
+        <p><strong>Result:</strong> {{ result }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

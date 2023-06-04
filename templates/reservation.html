@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reservation</title>
+</head>
+<body>
+    <h1>Reservation</h1>
+    <form method="POST" action="{{ url_for('reservation', book_id=book_id) }}">
+        <div>
+            <label for="date_reservation">Date for reservation:</label>
+            <input type="date" id="date_reservation" name="date_reservation">
+        </div>
+        <button type="submit">Submit Reservation</button>
+    </form>
+</body>
+</html>

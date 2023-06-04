@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Search</title>
+    <style>
+        .power-buttons {
+            display: none;
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+        }
+    </style>
+    <script>
+        document.addEventListener('click', function(event) {
+            var target = event.target;
+            var isHyperlink = target.tagName.toLowerCase() === 'a';
+            var isPowerButton = target.classList.contains('power-button');
+
+            if (!isHyperlink && !isPowerButton) {
+                var powerButtons = document.getElementsByClassName("power-buttons");
+                for (var i = 0; i < powerButtons.length; i++) {
+                    powerButtons[i].style.display = "none";
+                }
+            }
+        });
+
+        function showPowerButtons(bookId) {
+            var powerButtons = document.getElementsByClassName("power-buttons");
+            for (var i = 0; i < powerButtons.length; i++) {
+                powerButtons[i].style.display = "none";
+            }
+            var currentPowerButtons = document.getElementById("power-buttons-" + bookId);
+            currentPowerButtons.style.display = "block";
+        }
+    </script>
+</head>
+<body>
+    <h1>Book Search</h1>
+    <form method="POST" action="/book_search">
+        <label for="book_title">Book Title:</label>
+        <select id="book_title" name="book_title">
+            <option value="">All</option>
+            {% for book in book_titles %}
+                <option value="{{ book }}">{{ book }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="category">Category:</label>
+        <select id="category" name="category">
+            <option value="">All</option>
+            {% for category in categories %}
+                <option value="{{ category }}">{{ category }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="author">Author:</label>
+        <select id="author" name="author">
+            <option value="">All</option>
+            {% for author in authors %}
+                <option value="{{ author }}">{{ author }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Search</button>
+    </form>
+    <!-- Book list display -->
+    {% if books %}
+      <h2>Search Results:</h2>
+      <ul>
+          {% for book in books %}
+              <li>
+                  <a href="#" onclick="showPowerButtons('{{ book[3] }}')">{{ book[0]}} - {{ book[1] }} - {{ book[2] }}</a>
+                  <div id="power-buttons-{{ book[3] }}" class="power-buttons">
+                      <form action="{{ url_for('handle_book_action', book_id=book[3]) }}" method="POST">
+                          <button class="power-button" type="submit" name="reservation">Reserve</button>
+                          <button class="power-button" type="submit" name="issue">Issue</button>
+                          <button class="power-button" type="submit" name="review">Review</button>
+                      </form>
+                  </div>
+              </li>
+          {% endfor %}
+      </ul>
+  {% else %}
+      <p>No books found.</p>
+  {% endif %}
+  </body>
+  </html>

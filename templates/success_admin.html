@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Account</title>
+</head>
+<body>
+  <form method="POST" action="/success_admin">
+      {{ form.query1 }}
+      {{ form.query1_year }}
+      {{ form.query1_month }}
+  </form>
+  <form method="POST" action="/success_admin">
+      {{ form.query2 }}
+      {{ form.query2_category }}
+  </form>
+  <form method="POST" action="/success_admin">
+      {{ form.query3 }}
+  </form>
+  <form method="POST" action="/success_admin">
+      {{ form.query4 }}
+  </form>
+  <form method="POST" action="/success_admin">
+      {{ form.query5 }}
+  </form>
+  <form method="POST" action="/success_admin">
+      {{ form.query6 }}
+  </form>
+  <form method="POST" action="/success_admin">
+      {{ form.query7 }}
+  </form>
+
+  <h2>Results:</h2>
+  <ul>
+    {% for result in results %}
+      <li>
+        <p><strong>Result:</strong> {{ result }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
